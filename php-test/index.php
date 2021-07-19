@@ -20,6 +20,7 @@ echo "<br>당신은  ";
 echo $_SERVER['REMOTE_ADDR'];
 echo "를 통하여 접속중입니다<br>";
 echo "지금은 장마기간으로 비가 많이 온다<br>";
+echo "지금은 장마기간으로 Snow가 많이 온다<br>";
  ?> 
 </body>
 </html>
