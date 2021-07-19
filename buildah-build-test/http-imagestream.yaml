@@ -1,0 +1,6 @@
+kind: ImageStream
+apiVersion: v1
+metadata:
+  name: httpd-custom
+  namespace: html-test --> 변경 필요
+spec: {}

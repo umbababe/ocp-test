@@ -1,0 +1,24 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: tomcat-container
+  namespace: source-test
+  labels:
+    app: tomcat-container
+    app.kubernetes.io/component: tomcat-container
+    app.kubernetes.io/instance: tomcat-container
+    app.kubernetes.io/name: tomcat-container
+    app.kubernetes.io/part-of: tomcat-container-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: '1.8.0_262'
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: tomcat-container-source-test.apps.ocp4.internal.local
+  to:
+    kind: Service
+    name: tomcat-container
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

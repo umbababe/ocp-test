@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: httpd-buildah-buildconfig
+  labels:
+    name: httpd-buildah-buildconfig
+  namespace: test-buildah
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+spec:
+  strategy:
+    type: Custom
+    customStrategy:
+      forcePull: true
+      from:
+        kind: ImageStreamTag
+        name: custom-buildah-image:latest
+        namespace: test-buildah
+      env: []
+  output:
+    to:
+      kind: ImageStreamTag
+      name: httpd-buildah-image:latest

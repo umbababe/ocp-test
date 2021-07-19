@@ -1,0 +1,55 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: tomcat-container
+  namespace: source-test
+  labels:
+    app: tomcat-container
+    app.kubernetes.io/component: tomcat-container
+    app.kubernetes.io/instance: tomcat-container
+    app.kubernetes.io/name: tomcat
+    app.kubernetes.io/part-of: tomcat-container-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: '1.8.0_262'
+  annotations:
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: 'https://github.com/cellist01/openshift-test.git'
+    openshift.io/generated-by: OpenShiftWebConsole
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'tomcat-image:latest-1.0'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: source-test
+        name: 'tomcat-image:latest'
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/cellist01/openshift-test.git'
+      ref: master
+    contextDir: /basex-web-master
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: tomcat-image-generic-webhook-secret
+    - type: GitHub
+      github:
+        secretReference:
+          name: tomcat-image-github-webhook-secret
+    - type: ImageChange
+      imageChange:
+        lastTriggeredImageID: >-
+          image-registry.openshift-image-registry.svc:5000/source-test/tomcat-image/sha256:a09effab345b0743064c1afd02432f04e6b0888053b061df3283416cd9d39f62
+    - type: ConfigChange
+  runPolicy: Serial

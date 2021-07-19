@@ -1,0 +1,28 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-container
+  namespace: source-test
+  labels:
+    app: tomcat-container
+    app.kubernetes.io/component: tomcat-container
+    app.kubernetes.io/instance: tomcat-container
+    app.kubernetes.io/name: tomcat
+    app.kubernetes.io/part-of: tomcat-container-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: '1.8.0_262'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  selector:
+    app: tomcat-container
+    deploymentconfig: tomcat-container
+  type: ClusterIP
+  sessionAffinity: None

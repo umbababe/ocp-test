@@ -1,0 +1,34 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: tomcat-s2i-app-buildconfig
+  labels:
+    name: tomcat-s2i-app-buildconfig
+  namespace: kyobotest
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+spec:
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/cellist01/openshift-test.git'
+    contextDir: "mavenbuild-test"
+    type: Git
+  strategy:
+    type: Custom
+    customStrategy:
+      forcePull: true
+      from:
+        kind: ImageStreamTag
+        name: tomcat-s2i-build:1.0
+        namespace: openshift
+      env: []
+  output:
+    to:
+      kind: ImageStreamTag
+      name: tomcat-s2i-image:1.0
+      namespace: kyobotest
+  triggers:
+    - type: ImageChange
+      imageChange: {}
+    - type: ConfigChange

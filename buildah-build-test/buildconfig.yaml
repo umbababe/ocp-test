@@ -1,0 +1,21 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: httpd-custom-build
+  labels:
+    name: httpd-custom-build
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+spec:
+  strategy:
+    type: Custom
+    customStrategy:
+      forcePull: true
+      from:
+        kind: ImageStreamTag
+        name: custom-builder-image:latest
+        namespace: source-test ->> 변경 필요
+  output:
+    to:
+      kind: ImageStreamTag
+      name: httpd-custom:1.0
