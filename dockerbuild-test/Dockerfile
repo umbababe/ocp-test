@@ -1,4 +1,4 @@
-FROM docker.io/httpd-go:latest
+FROM polinux/httpd-ph
 USER root
 LABEL maintainer="hwcho"
 # Update image
