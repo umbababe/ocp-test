@@ -1,4 +1,4 @@
-FROM httpd:2.4
+FROM registry.access.redhat.com/ubi7/ubi
 USER root
 LABEL maintainer="hwcho"
 # Update image
