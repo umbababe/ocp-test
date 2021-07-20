@@ -1,4 +1,4 @@
-FROM httpd
+FROM docker.io/httpd-go:latest
 USER root
 LABEL maintainer="hwcho"
 # Update image
