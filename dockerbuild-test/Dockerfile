@@ -1,4 +1,4 @@
-FROM centos/httpd-24-centos7
+FROM httpd
 USER root
 LABEL maintainer="hwcho"
 # Update image
