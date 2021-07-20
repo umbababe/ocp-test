@@ -2,8 +2,8 @@ FROM centos/httpd-24-centos7
 USER root
 LABEL maintainer="hwcho"
 # Update image
-RUN yum update -y && rm -rf /var/cache/yum
-RUN yum install -y httpd
+# RUN yum update -y && rm -rf /var/cache/yum
+# RUN yum install -y httpd
 # Add default Web page and expose port
 # RUN echo "The Web Server is Running" > /var/www/html/index.html
 RUN mkdir -p /var/www/html/styles
