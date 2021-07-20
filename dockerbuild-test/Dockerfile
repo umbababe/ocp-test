@@ -1,4 +1,4 @@
-FROM polinux/httpd-ph
+FROM polinux/httpd-php
 USER root
 LABEL maintainer="hwcho"
 # Update image
